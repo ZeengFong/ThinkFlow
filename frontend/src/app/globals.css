@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ─── ThinkFlow Design System ─── */
+
+@theme inline {
+  /* Core palette */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Font families */
+  --font-serif: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+  --font-sans: var(--font-serif);
+  --font-mono: "SF Mono", "Fira Code", monospace;
+
+  /* ThinkFlow accent palette */
+  --color-baby-blue: #89cff0;
+  --color-baby-blue-light: #b8e2f8;
+  --color-baby-blue-dark: #5aabdb;
+  --color-soft-green: #a0e8af;
+  --color-soft-green-light: #c5f0ce;
+  --color-muted-coral: #f4a261;
+  --color-muted-coral-light: #f8c494;
+  --color-surface-light: #f8f9fa;
+  --color-surface-dark: #121212;
+
+  /* shadcn mapped colors */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Sidebar */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+
+  /* Charts */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Radii — spec uses rounded-2xl / rounded-3xl */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+}
+
+/* ─── Light Theme (default) ─── */
+:root {
+  --radius: 0.75rem;
+
+  /* Backgrounds — NEVER pure white. Off-white #F8F9FA */
+  --background: #f8f9fa;
+  --foreground: #2d2d2d;
+
+  /* Cards & Popovers — glass-like surfaces */
+  --card: rgba(255, 255, 255, 0.72);
+  --card-foreground: #2d2d2d;
+  --popover: rgba(255, 255, 255, 0.85);
+  --popover-foreground: #2d2d2d;
+
+  /* Primary — Baby Blue #89CFF0 */
+  --primary: #89cff0;
+  --primary-foreground: #0a1628;
+
+  /* Secondary — soft neutral */
+  --secondary: #eef1f4;
+  --secondary-foreground: #2d2d2d;
+
+  /* Muted */
+  --muted: #e8ecef;
+  --muted-foreground: #6b7280;
+
+  /* Accent — Baby Blue tint */
+  --accent: #d6ecfa;
+  --accent-foreground: #0a1628;
+
+  /* Destructive / Overdue — Muted Coral #F4A261 */
+  --destructive: #f4a261;
+
+  /* Borders — ultra-subtle */
+  --border: rgba(0, 0, 0, 0.06);
+  --input: rgba(0, 0, 0, 0.08);
+  --ring: #89cff0;
+
+  /* Charts */
+  --chart-1: #89cff0;
+  --chart-2: #a0e8af;
+  --chart-3: #f4a261;
+  --chart-4: #c4b5fd;
+  --chart-5: #fca5a5;
+
+  /* Sidebar */
+  --sidebar: #ffffff;
+  --sidebar-foreground: #2d2d2d;
+  --sidebar-primary: #89cff0;
+  --sidebar-primary-foreground: #0a1628;
+  --sidebar-accent: #d6ecfa;
+  --sidebar-accent-foreground: #0a1628;
+  --sidebar-border: rgba(0, 0, 0, 0.06);
+  --sidebar-ring: #89cff0;
+}
+
+/* ─── Dark Theme ─── */
+.dark {
+  /* Backgrounds — NEVER pure black. Dark grey #121212 */
+  --background: #121212;
+  --foreground: #e4e4e7;
+
+  --card: rgba(255, 255, 255, 0.05);
+  --card-foreground: #e4e4e7;
+  --popover: rgba(255, 255, 255, 0.08);
+  --popover-foreground: #e4e4e7;
+
+  --primary: #89cff0;
+  --primary-foreground: #0a1628;
+
+  --secondary: #1e1e1e;
+  --secondary-foreground: #e4e4e7;
+
+  --muted: #262626;
+  --muted-foreground: #9ca3af;
+
+  --accent: rgba(137, 207, 240, 0.15);
+  --accent-foreground: #89cff0;
+
+  --destructive: #f4a261;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #89cff0;
+
+  --chart-1: #89cff0;
+  --chart-2: #a0e8af;
+  --chart-3: #f4a261;
+  --chart-4: #c4b5fd;
+  --chart-5: #fca5a5;
+
+  --sidebar: #1a1a1a;
+  --sidebar-foreground: #e4e4e7;
+  --sidebar-primary: #89cff0;
+  --sidebar-primary-foreground: #0a1628;
+  --sidebar-accent: rgba(137, 207, 240, 0.12);
+  --sidebar-accent-foreground: #89cff0;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: #89cff0;
+}
+
+/* ─── Base Styles ─── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Palatino Linotype", "Book Antiqua", "Palatino", serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+}
+
+/* ─── ThinkFlow Utilities ─── */
+@layer utilities {
+  /* Glass surface — spec: low-opacity + backdrop-blur */
+  .glass {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .dark .glass {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* Press effect — spec: buttons scale-95 on press */
+  .press {
+    transition: transform 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .press:active {
+    transform: scale(0.95);
+  }
+
+  /* Subtle shadow — diffuse, no harsh lines */
+  .shadow-soft {
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.04),
+      0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+
+  .shadow-soft-lg {
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.04),
+      0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+}
