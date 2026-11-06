@@ -1,0 +1,29 @@
+# Render Blueprint for the ThinkFlow backend (FastAPI).
+# Render → New → Blueprint → pick this repo. See DEPLOY.md.
+services:
+  - type: web
+    name: thinkflow-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      # Supabase → Connect → "Session pooler" connection string (replace [YOUR-PASSWORD])
+      - key: DATABASE_URL
+        sync: false
+      # https://<project-ref>.supabase.co
+      - key: SUPABASE_URL
+        sync: false
+      # Your Vercel URL, e.g. https://thinkflow.vercel.app (comma-separate several)
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: AI_DAILY_LIMIT
+        value: "60"
