@@ -19,6 +19,8 @@ interface AuthContextType {
   /** True when running without Supabase, signed in as a local test user. */
   localMode: boolean;
   signInWithGoogle: () => Promise<string | null>;
+  /** Signs in with an ID token from Google's own button. Returns an error message, or null. */
+  signInWithGoogleIdToken: (idToken: string, nonce: string) => Promise<string | null>;
   /** Sends a magic sign-in link. Returns an error message, or null on success. */
   signInWithEmail: (email: string) => Promise<string | null>;
   signOut: () => Promise<void>;
@@ -40,6 +42,7 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
   localMode: false,
   signInWithGoogle: async () => null,
+  signInWithGoogleIdToken: async () => null,
   signInWithEmail: async () => null,
   signOut: async () => {},
 });
@@ -87,6 +90,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return error ? error.message : null;
   }, [supabase]);
 
+  const signInWithGoogleIdToken = useCallback(
+    async (idToken: string, nonce: string) => {
+      if (!supabase) return null;
+      const { error } = await supabase.auth.signInWithIdToken({
+        provider: "google",
+        token: idToken,
+        nonce,
+      });
+      return error ? error.message : null;
+    },
+    [supabase]
+  );
+
   const signInWithEmail = useCallback(
     async (email: string) => {
       if (!supabase) {
@@ -110,7 +126,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, session, loading, localMode, signInWithGoogle, signInWithEmail, signOut }}
+      value={{
+        user,
+        session,
+        loading,
+        localMode,
+        signInWithGoogle,
+        signInWithGoogleIdToken,
+        signInWithEmail,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

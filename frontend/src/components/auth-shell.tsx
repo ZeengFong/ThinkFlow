@@ -7,10 +7,10 @@ import { Sidebar } from "@/components/sidebar";
 import { Loader2, Menu, Workflow } from "lucide-react";
 
 /**
- * Renders the sidebar and protects routes. Public: /, /login, /auth/*.
+ * Renders the sidebar and protects routes. Public: /, /login, /privacy, /terms, /auth/*.
  * Data is also protected server-side: the backend checks every request.
  */
-const PUBLIC_ROUTES = ["/", "/login"];
+const PUBLIC_ROUTES = ["/", "/login", "/privacy", "/terms"];
 
 export function AuthShell({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
