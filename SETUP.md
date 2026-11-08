@@ -61,9 +61,10 @@ The backend verifies sign-in tokens with your project's public signing keys auto
 1. Google Cloud: create a project at https://console.cloud.google.com/projectcreate.
 2. Set up the consent screen at https://console.cloud.google.com/auth/branding (app name, support email). While the app is in "Testing", add your testers under **Audience**, or click **Publish app** to let anyone sign in.
 3. **Clients → Create client → Web application** at https://console.cloud.google.com/auth/clients:
-   - Authorized JavaScript origins: `http://localhost:3000` (add your Vercel URL later)
+   - Authorized JavaScript origins: `http://localhost:3000` **and** `http://localhost` (add your Vercel URL later)
    - Authorized redirect URIs: `https://<your-project-ref>.supabase.co/auth/v1/callback` (Supabase shows this exact URL on its Google provider page)
 4. Copy the **Client ID** and **Client secret** into Supabase → **Authentication → Sign In / Providers → Google**, enable it, and save.
+5. Optional but recommended: also put the Client ID in `frontend/.env.local` as `NEXT_PUBLIC_GOOGLE_CLIENT_ID`. The login page then uses Google's own button, and Google's screen names your site instead of `<project-ref>.supabase.co`. See DEPLOY.md, section 5.
 
 ### 4c. Email sign-in links
 The email provider is on by default. Supabase's built-in email service is only for testing: it sends a few emails per hour, and only to members of your Supabase organization. For real students:

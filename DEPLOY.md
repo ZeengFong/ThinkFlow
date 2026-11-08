@@ -33,6 +33,7 @@ The free tier sleeps after about 15 minutes idle, so the next visit takes up to 
    - `NEXT_PUBLIC_API_URL`: your Render URL, e.g. `https://thinkflow-api.onrender.com`
    - `NEXT_PUBLIC_SUPABASE_URL`: `https://<project-ref>.supabase.co`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: your publishable key
+   - `NEXT_PUBLIC_GOOGLE_CLIENT_ID` (recommended): your Google OAuth **Client ID**. See "Show ThinkFlow on Google's sign-in screen" below.
 4. Deploy and note the URL, e.g. `https://thinkflow.vercel.app`.
 
 ## 4. Connect the pieces
@@ -42,6 +43,14 @@ The free tier sleeps after about 15 minutes idle, so the next visit takes up to 
 - **Google consent screen**: click **Publish app** so any student can sign in, not just test users.
 
 Then open the Vercel URL, sign in, create a project and click **Build my plan with AI**.
+
+## 5. Show ThinkFlow on Google's sign-in screen
+With a plain Supabase redirect, Google's screen says "continue to `<project-ref>.supabase.co`". To show your own site instead:
+
+1. **Use Google's button.** Set `NEXT_PUBLIC_GOOGLE_CLIENT_ID` on Vercel to the Client ID from Google Cloud → Clients (it ends in `.apps.googleusercontent.com`; it is public, not a secret), then redeploy. The login page switches to Google's own button and signs in with `signInWithIdToken`, so Google names your site. If Google's script is blocked (for example by an ad blocker), the page falls back to the redirect button automatically.
+   - The Client ID must be the one entered in Supabase → **Authentication → Sign In / Providers → Google** (Supabase checks the token was issued for it).
+   - Every site that shows the button must be in the OAuth client's **Authorized JavaScript origins**: your Vercel URL, plus `http://localhost` **and** `http://localhost:3000` for development.
+2. **Show the name "ThinkFlow" and logo (brand verification).** At https://console.cloud.google.com/auth/branding fill in the app name, logo, home page (`https://<vercel-url>`), privacy policy (`https://<vercel-url>/privacy`) and terms (`https://<vercel-url>/terms`). Under **Authorized domains** add your site's domain. Then submit for verification under **Verification Center**. Google requires you to prove you own the domain in Google Search Console, which is not possible for a shared `vercel.app` address, so brand verification needs a domain you own (about $10/year) added to Vercel under **Domains**. Basic sign-in scopes (name, email, picture) don't need the longer security review.
 
 ## Environment variables
 
@@ -67,6 +76,7 @@ Then open the Vercel URL, sign in, create a project and click **Build my plan wi
 | `NEXT_PUBLIC_API_URL` | backend URL |
 | `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | publishable key (safe in the browser) |
+| `NEXT_PUBLIC_GOOGLE_CLIENT_ID` | optional: Google OAuth Client ID; turns on Google's own sign-in button |
 
 ## Limits to know about
 - Free-tier AI quotas are shared by everyone using your deployment. Raise or lower `AI_DAILY_LIMIT`, add a `GEMINI_API_KEY` as backup, or add a paid key later.

@@ -50,6 +50,15 @@ export default function RootPage() {
           </div>
         ))}
       </motion.div>
+
+      <footer className="flex gap-4 text-xs text-muted-foreground">
+        <Link href="/privacy" className="hover:text-foreground">
+          Privacy Policy
+        </Link>
+        <Link href="/terms" className="hover:text-foreground">
+          Terms of Service
+        </Link>
+      </footer>
     </main>
   );
 }
